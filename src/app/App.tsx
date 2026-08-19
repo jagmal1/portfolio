@@ -24,7 +24,8 @@ import { Footer } from "./components/Footer";
 /* ── Dark mode helpers ── */
 function getInitialTheme(): "light" | "dark" {
   if (typeof window === "undefined") return "light";
-  const stored = localStorage.getItem("jr-theme") as "light" | "dark" | null;
+  localStorage.removeItem("jr-theme");
+  const stored = localStorage.getItem("portfolio-theme-v2") as "light" | "dark" | null;
   if (stored) return stored;
   return "light";
 }
@@ -39,7 +40,7 @@ export default function App() {
     const root = document.documentElement;
     if (theme === "dark") root.classList.add("dark");
     else root.classList.remove("dark");
-    localStorage.setItem("jr-theme", theme);
+    localStorage.setItem("portfolio-theme-v2", theme);
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
