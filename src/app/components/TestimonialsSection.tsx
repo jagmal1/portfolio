@@ -157,7 +157,7 @@ export function TestimonialsSection({ isDark }: Props) {
           style={{ background: `linear-gradient(-90deg, ${fadeL}1), transparent)` }}
         />
 
-        <div className="overflow-hidden">
+        <div className="overflow-x-hidden py-4">
           <div
             className="flex"
             style={{
