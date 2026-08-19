@@ -79,23 +79,23 @@ function ProjectModal({ p, onClose, isDark }: { p: typeof projects[0]; onClose: 
 
   return (
     <motion.div
-      className="fixed inset-0 z-[1000] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
     >
-      <div className="absolute inset-0" style={{ background: "rgba(5,5,15,0.6)", backdropFilter: "blur(16px)" }} />
+      <div className="absolute inset-0" style={{ background: "rgba(5,5,15,0.75)", backdropFilter: "blur(16px)" }} />
       <motion.div
-        className="relative w-full max-w-2xl rounded-3xl overflow-hidden"
-        style={{ background: modalBg, boxShadow: "0 40px 120px rgba(0,0,0,0.35)" }}
+        className="relative w-full max-w-2xl max-h-[88vh] flex flex-col rounded-3xl overflow-hidden"
+        style={{ background: modalBg, boxShadow: "0 40px 120px rgba(0,0,0,0.5)" }}
         initial={{ scale: 0.92, y: 40 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.92, y: 40 }}
         transition={{ type: "spring", stiffness: 320, damping: 28 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative h-52">
+        <div className="relative h-48 sm:h-52 flex-shrink-0">
           <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
           <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.75))" }} />
           <div className="absolute bottom-4 left-6">
@@ -105,12 +105,12 @@ function ProjectModal({ p, onClose, isDark }: { p: typeof projects[0]; onClose: 
           </div>
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center text-white text-lg"
-            style={{ background: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}
+            className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center text-white text-lg z-20 hover:scale-110 active:scale-95 transition-transform"
+            style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)" }}
           >×</button>
         </div>
 
-        <div className="p-7 max-h-[60vh] overflow-y-auto">
+        <div className="p-6 sm:p-7 overflow-y-auto flex-1">
           <p className="leading-relaxed mb-5 text-sm" style={{ color: subC, fontFamily: "'Inter', sans-serif" }}>{p.longDesc}</p>
 
           <div className="grid grid-cols-3 gap-3 mb-5 p-4 rounded-2xl" style={{ background: `${p.accent}08`, border: `1px solid ${p.accent}14` }}>

@@ -56,7 +56,7 @@ function ResumeModal({ isDark, onClose }: { isDark: boolean; onClose: () => void
 
   return (
     <motion.div
-      className="fixed inset-0 z-[999] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-3 md:p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -115,7 +115,7 @@ function ResumeModal({ isDark, onClose }: { isDark: boolean; onClose: () => void
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.7, opacity: 0, y: 60 }}
         transition={{ type: "spring", stiffness: 260, damping: 22 }}
-        className="relative z-10 w-full max-w-3xl"
+        className="relative z-10 w-full max-w-3xl max-h-[88vh] flex flex-col"
       >
         {/* Dynamic glow that follows mouse */}
         <motion.div
@@ -131,7 +131,7 @@ function ResumeModal({ isDark, onClose }: { isDark: boolean; onClose: () => void
 
         {/* Card shell */}
         <div
-          className="relative rounded-3xl border overflow-hidden"
+          className="relative rounded-3xl border overflow-hidden flex flex-col max-h-[88vh]"
           style={{
             background: isDark
               ? "rgba(13,15,35,0.95)"
@@ -203,7 +203,7 @@ function ResumeModal({ isDark, onClose }: { isDark: boolean; onClose: () => void
           </div>
 
           {/* PDF Iframe */}
-          <div className="relative" style={{ height: "75vh" }}>
+          <div className="relative flex-1" style={{ height: "70vh", maxHeight: "650px" }}>
             {/* Corner accent glows */}
             <div
               className="absolute top-0 left-0 w-32 h-32 rounded-br-full opacity-10 pointer-events-none"

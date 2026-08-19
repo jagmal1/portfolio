@@ -128,7 +128,7 @@ export default function App() {
               <span>Command Palette</span>
             </motion.button>
 
-            <main className="relative z-10">
+            <main className="relative">
               <HeroSection isDark={isDark} />
               {/* <StatsSection isDark={isDark} /> */}
               <AboutSection isDark={isDark} />
