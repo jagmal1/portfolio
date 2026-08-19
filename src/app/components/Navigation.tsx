@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -19,6 +19,7 @@ export function Navigation({ isDark, onToggleTheme }: Props) {
   const [activeSection, setActiveSection] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showThemeTooltip, setShowThemeTooltip] = useState(true);
   const { scrollY } = useScroll();
   const navPadding = useTransform(scrollY, [0, 80], [18, 10]);
 
@@ -120,29 +121,80 @@ export function Navigation({ isDark, onToggleTheme }: Props) {
 
           {/* Right side: theme toggle + hire btn */}
           <div className="flex items-center gap-2 ml-auto">
-            {/* Theme toggle */}
-            <motion.button
-              onClick={onToggleTheme}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
-              className="w-9 h-9 rounded-xl flex items-center justify-center border text-base transition-all"
-              style={{
-                background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
-                borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)",
-                boxShadow: isDark ? "0 0 12px rgba(129,140,248,0.2)" : "none",
-              }}
-              title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-            >
-              <motion.span
-                key={isDark ? "moon" : "sun"}
-                initial={{ rotate: -45, opacity: 0, scale: 0.7 }}
-                animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                exit={{ rotate: 45, opacity: 0, scale: 0.7 }}
-                transition={{ duration: 0.25 }}
+            {/* Theme toggle container */}
+            <div className="relative">
+              <motion.button
+                onClick={() => {
+                  setShowThemeTooltip(false);
+                  onToggleTheme();
+                }}
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.92 }}
+                className="w-9 h-9 rounded-xl flex items-center justify-center border text-base transition-all"
+                style={{
+                  background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+                  borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)",
+                  boxShadow: isDark ? "0 0 12px rgba(129,140,248,0.2)" : "none",
+                }}
+                title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
               >
-                {isDark ? "☀️" : "🌙"}
-              </motion.span>
-            </motion.button>
+                <motion.span
+                  key={isDark ? "moon" : "sun"}
+                  initial={{ rotate: -45, opacity: 0, scale: 0.7 }}
+                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                  exit={{ rotate: 45, opacity: 0, scale: 0.7 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  {isDark ? "☀️" : "🌙"}
+                </motion.span>
+              </motion.button>
+
+              {/* Custom Popup Tooltip */}
+              <AnimatePresence>
+                {showThemeTooltip && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.9 }}
+                    transition={{ delay: 0.6, duration: 0.3 }}
+                    className="absolute top-full right-0 mt-3.5 whitespace-nowrap z-50 flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-semibold"
+                    style={{
+                      background: isDark ? "rgba(18, 19, 31, 0.96)" : "rgba(255, 255, 255, 0.96)",
+                      borderColor: isDark ? "rgba(99,102,241,0.4)" : "rgba(99,102,241,0.35)",
+                      color: isDark ? "#a5b4fc" : "#4f46e5",
+                      boxShadow: isDark ? "0 10px 30px rgba(0,0,0,0.5)" : "0 10px 30px rgba(99,102,241,0.15)",
+                      backdropFilter: "blur(12px)",
+                      fontFamily: "'Space Grotesk', sans-serif"
+                    }}
+                  >
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                    </span>
+                    <span>Change theme from here</span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowThemeTooltip(false);
+                      }}
+                      className="ml-1 text-xs opacity-60 hover:opacity-100 transition-opacity"
+                      aria-label="Close tooltip"
+                    >
+                      ✕
+                    </button>
+
+                    {/* Arrow pointer */}
+                    <div
+                      className="absolute -top-1.5 right-3 w-3 h-3 rotate-45 border-t border-l"
+                      style={{
+                        background: isDark ? "#12131F" : "#ffffff",
+                        borderColor: isDark ? "rgba(99,102,241,0.4)" : "rgba(99,102,241,0.35)",
+                      }}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             {/* Hire Me button */}
             <button
