@@ -24,6 +24,13 @@ export function Navigation({ isDark, onToggleTheme }: Props) {
   const navPadding = useTransform(scrollY, [0, 80], [18, 10]);
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowThemeTooltip(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
