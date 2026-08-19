@@ -122,7 +122,7 @@ export function TestimonialsSection({ isDark }: Props) {
               color: textC,
             }}
           >
-            Real{" "}
+           
             <span style={{ backgroundImage: "linear-gradient(135deg, #6366f1, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
               Testimonials
             </span>

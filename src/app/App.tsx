@@ -26,7 +26,7 @@ function getInitialTheme(): "light" | "dark" {
   if (typeof window === "undefined") return "light";
   const stored = localStorage.getItem("jr-theme") as "light" | "dark" | null;
   if (stored) return stored;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return "light";
 }
 
 export default function App() {
@@ -41,18 +41,6 @@ export default function App() {
     else root.classList.remove("dark");
     localStorage.setItem("jr-theme", theme);
   }, [theme]);
-
-  /* Track system preference changes */
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const onChange = (e: MediaQueryListEvent) => {
-      if (!localStorage.getItem("jr-theme")) {
-        setTheme(e.matches ? "dark" : "light");
-      }
-    };
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
 
   const toggleTheme = useCallback(() => {
     setTheme((t) => (t === "dark" ? "light" : "dark"));
