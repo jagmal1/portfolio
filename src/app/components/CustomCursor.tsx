@@ -110,13 +110,13 @@ export function CustomCursor({ isDark }: Props) {
       {/* Particle canvas */}
       <canvas
         ref={canvasRef}
-        className="fixed inset-0 pointer-events-none z-[9996]"
+        className="fixed inset-0 pointer-events-none z-[99997]"
         style={{ mixBlendMode: isDark ? "screen" : "multiply" }}
       />
 
       {/* Inner dot */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999]"
+        className="fixed top-0 left-0 pointer-events-none z-[99999]"
         style={{ x: springX, y: springY, translateX: "-50%", translateY: "-50%" }}
         animate={{ opacity: isVisible ? 1 : 0 }}
       >
@@ -141,7 +141,7 @@ export function CustomCursor({ isDark }: Props) {
       {/* Outer ring */}
       {ringSize > 0 && (
         <motion.div
-          className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border"
+          className="fixed top-0 left-0 pointer-events-none z-[99998] rounded-full border"
           style={{ x: trailX, y: trailY, translateX: "-50%", translateY: "-50%" }}
           animate={{
             width: ringSize, height: ringSize,

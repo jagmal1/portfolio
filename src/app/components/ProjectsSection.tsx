@@ -79,7 +79,7 @@ function ProjectModal({ p, onClose, isDark }: { p: typeof projects[0]; onClose: 
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-6"
+      className="fixed inset-0 z-[9990] flex items-center justify-center p-4 md:p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
